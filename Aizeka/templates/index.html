@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Study Planner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="main-title">📘 AI Study Planner</h1>
+
+    <form method="POST" class="input-form">
+        <label>How many hours can you dedicate to studying each day?</label>
+        <input type="number" name="hours" required step="0.5">
+        <label>For how many days do you want to plan your study?</label>
+        <input type="number" name="days" required>
+
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <button type="submit" name="run_mode" value="schedule_only" class="submit-btn">🧮 Get Study Schedule</button>
+            <button type="submit" name="run_mode" value="run_all" class="submit-btn">▶️ Run All Algorithms</button>
+        </div>
+    </form>
+
+    {% if schedule_message %}
+        <div class="result-box">
+            <h2>📅 Personalized Daily Schedule</h2>
+            <p>{{ schedule_message }}</p>
+        </div>
+    {% endif %}
+
+    {% if task_a_results %}
+        <div class="result-box">
+            <h2>🧠 AI Recommendations Based on Your Inputs</h2>
+            <p>Our intelligent assistant analyzed your study pattern using 8 different models. Here are personalized suggestions:</p>
+            <table border="1" style="width:100%;">
+                <tr><th>Algorithm</th><th>Recommended Action</th><th>Confidence</th></tr>
+                {% for algo, result, acc in task_a_results %}
+                    <tr>
+                        <td>{{ algo }}</td>
+                        <td>
+                            {% if "Reading" in result %}
+                                📖 Focus on reading — it's a good time to absorb new material.
+                            {% elif "Practice" in result %}
+                                ✍️ Engage in practice — reinforce what you've learned!
+                            {% elif "Rest" in result %}
+                                😌 Take a rest — your brain needs time to recharge.
+                            {% else %}
+                                {{ result }}
+                            {% endif %}
+                        </td>
+                        <td>{{ (acc * 100) | round(1) }}%</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="result-box">
+            <h2>📈 Confidence Comparison (Accuracy)</h2>
+            <img src="/static/images/task_a_accuracy_chart.png" alt="Task A Chart" style="max-width: 100%; border-radius: 10px;">
+        </div>
+    {% endif %}
+
+    {% if task_b_results %}
+        <div class="result-box">
+            <h2>🧪 Pattern Discovery (Unsupervised Learning)</h2>
+
+            {% if task_b_results["KMeans"] %}
+                <p><strong>📊 Learning Style Analysis:</strong><br>
+                Based on your data, you're grouped with students who prefer a balanced and consistent learning rhythm. Keep it up!</p>
+            {% endif %}
+
+            {% if task_b_results["PCA"] %}
+                <p><strong>🎯 Data Simplification Insight:</strong><br>
+                PCA shows that your study behavior is mostly explained by just two main factors: focus and consistency.</p>
+                <p><em>{{ task_b_results["PCA"] }}</em></p>
+            {% endif %}
+
+            {% if task_b_results["FP-Growth"] %}
+                <p><strong>🔁 Detected Learning Habits:</strong></p>
+                <ul>
+                    {% for rule in task_b_results["FP-Growth"] %}
+                        <li>🧩 <strong>{{ rule }}</strong> — this is a common pattern among learners like you.</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="result-box">
+        <h2>🖼️ Learning Environment Analysis</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="run_mode" value="run_cv">
+            <input type="file" name="image_file" accept="image/*" required><br><br>
+            <button type="submit" class="submit-btn">🧠 Analyze My Environment</button>
+        </form>
+        {% if task_c_result %}
+            <p><strong>📷 Detected in your image:</strong> {{ task_c_result }}</p>
+            <p>
+                {% if "desk" in task_c_result.lower() %}
+                    🎉 Great! You're in a study-friendly environment. Stay focused!
+                {% elif "bed" in task_c_result.lower() %}
+                    😴 Hmm... try switching to a desk for better concentration.
+                {% else %}
+                    🔍 Interesting setting — make sure it's helping, not distracting.
+                {% endif %}
+            </p>
+            <img src="{{ image_path }}" style="max-width: 400px; border-radius: 10px;">
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

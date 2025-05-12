@@ -1,0 +1,168 @@
+/* === Общие стили === */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8d4d7; /* Нежно-розовый фон */
+    color: #3b3b3b;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+    padding-top: 40px;
+}
+
+/* === Основной контейнер === */
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* === Заголовок === */
+.main-title {
+    font-size: 38px;
+    color: #d32f7b;
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: bold;
+}
+
+/* === Форма === */
+.input-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+label {
+    font-size: 20px;
+    text-align: center;
+    color: #6a1b3f;
+}
+
+input {
+    font-size: 18px;
+    padding: 10px;
+    width: 60%;
+    border-radius: 8px;
+    border: 2px solid #e6a1b2;
+    background-color: #fff0f5;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border-color: #d81b60;
+}
+
+/* === Кнопки === */
+button {
+    background-color: #e63e6e;
+    color: white;
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c2185b;
+}
+
+/* === Блоки результатов === */
+.result-box {
+    background-color: #fce4ec;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Заголовки внутри блоков === */
+h2 {
+    font-size: 24px;
+    color: #d32f7b;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* === Обычный текст === */
+p {
+    font-size: 18px;
+    color: #4a4a4a;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* === Списки === */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    font-size: 18px;
+    color: #3b3b3b;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* === Кастомная подсветка советов === */
+.recommendation {
+    color: #e91e63;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 12px;
+    background-color: #fff0f5;
+    border-left: 4px solid #e91e63;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+/* === Изображения === */
+img {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* === Таблицы === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+table th {
+    background-color: #f8bbd0;
+    color: #4a004d;
+}
+
+table td {
+    background-color: #fff0f5;
+}
+
+@media (max-width: 768px) {
+    input {
+        width: 90%;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,46 @@
+digraph HouseManagementDB {
+	node [fillcolor=lightblue fontname=Arial shape=rectangle style=filled]
+	Residents [label="Residents
+Resident_ID (PK)
+Full_Name
+Birth_Date
+Contact_Info
+Apartment_ID (FK)"]
+	Apartments [label="Apartments
+Apartment_ID (PK)
+Number
+Area
+Rooms
+Owner_ID (FK)
+House_ID (FK)"]
+	Houses [label="Houses
+House_ID (PK)
+Address
+Number_of_Apartments"]
+	Owners [label="Owners
+Owner_ID (PK)
+Full_Name
+Contact_Info"]
+	Utilities [label="Utilities
+Utility_ID (PK)
+Type
+Provider"]
+	Payments [label="Payments
+Payment_ID (PK)
+Resident_ID (FK)
+Utility_ID (FK)
+Amount
+Payment_Date"]
+	Maintenance_Requests [label="Maintenance_Requests
+Request_ID (PK)
+Apartment_ID (FK)
+Issue_Description
+Request_Date
+Status"]
+	Residents -> Apartments [label="lives in"]
+	Apartments -> Houses [label="belongs to"]
+	Apartments -> Owners [label="owned by"]
+	Payments -> Residents [label="made by"]
+	Payments -> Utilities [label="for utility"]
+	Maintenance_Requests -> Apartments [label="related to"]
+}
